@@ -786,7 +786,6 @@ export default {
         this.loadSupplierOptions()
         this.loadEmployeeOptions()
         this.loadWeighingCategoryOptions()
-
     },
     methods: {
         setCount(type, operator, number){
@@ -1070,7 +1069,7 @@ export default {
 
         // Weighing Category
         loadWeighingCategoryOptions(){
-            axios.get(window.location.origin + '/wh/weighing/api/v1/weighing-category-options')
+            axios.get(window.location.origin + '/wh/weighing-category/api/v1/weighing-category-options')
             .then(response => {
                 this.weighingCategoryOptions = response.data.data
                 this.weighingCategoryOptions.unshift({ id: null, name: 'Pilih Kategori' })

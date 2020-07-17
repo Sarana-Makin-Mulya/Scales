@@ -10,7 +10,7 @@
                     >
                         <div class="small-box bg-danger">
                         <div class="inner">
-                            <h4><i class="fas fa-balance-scale-left"></i></h4>
+                            <h4><i class="fas fa-arrow-right"></i> (Berat Akhir)</h4>
                             <p>Penimbangan Kedua</p>
                         </div>
                         <div class="icon">
@@ -26,7 +26,7 @@
                     >
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h4><i class="fas fa-balance-scale"></i></h4>
+                                <h4><i class="fas fa-arrow-left"></i> (Berat Awal)</h4>
                                 <p>Penimbangan Pertama</p>
                             </div>
                             <div class="icon">
@@ -75,6 +75,21 @@
                         Kategori
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        :class="(tab=='item') ? 'active' : '' "
+                        id="item-tab"
+                        data-toggle="tab"
+                        href="#item"
+                        role="tab"
+                        aria-controls="item"
+                        aria-selected="false"
+                        @click="tabLink('item')"
+                    >
+                        Barang
+                    </a>
+                </li>
                 </ul>
 
                 <div class="tab-content bg-light p-2" id="myTabContent">
@@ -113,6 +128,22 @@
                             v-if="tab=='category'"
                         ></weighing-category-table-records>
                     </div>
+
+                    <!-- Tab Content Base on Category-->
+                    <div
+                        class="tab-pane fade dnone"
+                        :class="(tab=='item') ? 'show active' : '' "
+                        id="item"
+                        role="tabpanel"
+                        aria-labelledby="item-tab"
+                    >
+                        <weighing-item-table-records
+                            :url-data="urlWeighingItemData"
+                            :url-store="urlWeighingItemStore"
+                            :url-check-name-exist="urlWeighingItemCheckNameExist"
+                            v-if="tab=='item'"
+                        ></weighing-item-table-records>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,181 +153,292 @@
             <div class="d-block text-center px-2 py-0">
                 <validation-observer ref="observerFirstForm" v-slot="{ invalid }" tag="form" @submit.prevent="submitFirstForm()">
                     <b-form @submit.prevent="submitFirstForm">
-                        <!--
-                            weighing_category_id : null,
-                            junk_item_request_code: null,
-                            junk_item_request_detail_id: null,
-                            purchase_order_code: null,
-                            purchasing_purchase_order_item_id: null,
-                            weighing_item_code: null,
-
-                            : null,
-                            receiper: null,
-                            : null,
-                            : null,
-                            : null,
-
-                            first_weight: null,
-                        -->
-
                             <div class="row">
-                                <div class="col-md-6 p-2">
+                                <div class="col-md-7 p-2">
                                 <!-- B : LEFT -->
-                                <div class="row bg-light rmb-20">
-                                    <div class="col-md-12 p-2 bg">
-                                        <b-form-group id="group-do-code" label="Supplier :" label-for="supplier_name" class="text-left">
-                                            <validation-provider mode="passive" name="Supplier" :rules="{required: true}" v-slot="{ errors }">
-                                                <b-form-input
-                                                    id="supplier_name"
-                                                    v-model="firstForm.supplier_name"
-                                                    type="text"
-                                                    placeholder="Masukan supplier"
-                                                    autocomplete="off"
-                                                    class="form-control form-control-lg text-left"
-                                                ></b-form-input>
-                                                <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
-                                            </validation-provider>
-                                        </b-form-group>
-                                    </div>
-                                </div>
-
-                                <div class="row bg-light rmb-20">
-                                    <div class="col-md-12 p-2 bg">
-                                        <b-form-group id="group-do-code" label="Nomor surat jalan :" label-for="do_code" class="text-left">
-                                            <validation-provider mode="passive" name="Nomor surat jalan" :rules="{required: true}" v-slot="{ errors }">
-                                                <b-form-input
-                                                    id="do_code"
-                                                    v-model="firstForm.do_code"
-                                                    type="text"
-                                                    placeholder="Masukan nomor surat jalan"
-                                                    autocomplete="off"
-                                                    class="form-control form-control-lg text-left"
-                                                ></b-form-input>
-                                                <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
-                                            </validation-provider>
-                                        </b-form-group>
-                                    </div>
-                                </div>
-
-                                <div class="row bg-light rmb-20">
-                                    <div class="col-md-12 p-2 bg">
-                                        <b-form-group id="group-do-code" label="Supir :" label-for="driver_name" class="text-left">
-                                            <validation-provider mode="passive" name="Supir" :rules="{required: true}" v-slot="{ errors }">
-                                                <b-form-input
-                                                    id="driver_name"
-                                                    v-model="firstForm.driver_name"
-                                                    type="text"
-                                                    placeholder="Masukan nama supir"
-                                                    autocomplete="off"
-                                                    class="form-control form-control-lg text-left"
-                                                ></b-form-input>
-                                                <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
-                                            </validation-provider>
-                                        </b-form-group>
-                                    </div>
-                                </div>
-
-                                <div class="row bg-light rmb-20">
-                                    <div class="col-md-12 p-2 bg">
-                                        <b-form-group id="group-do-code" label="No mobil/polisi :" label-for="first_number_plate" class="text-left">
-                                            <validation-provider mode="passive" name="No mobil/polisi" :rules="{required: true}" v-slot="{ errors }">
-                                                <b-form-input
-                                                    id="first_number_plate"
-                                                    v-model="firstForm.first_number_plate"
-                                                    type="text"
-                                                    placeholder="Masukan no mobil/polisi"
-                                                    autocomplete="off"
-                                                    class="form-control form-control-lg text-left"
-                                                ></b-form-input>
-                                                <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
-                                            </validation-provider>
-                                        </b-form-group>
-                                    </div>
-                                </div>
-                                <!-- B : LEFT -->
-                            </div>
-                            <div class="col-md-6 p-2">
-                                <!-- RIGHT -->
-                                <div class="row bg-light rmb-20">
-                                    <div class="col-md-12 p-2">
-                                        <!-- WEIGHING -->
-                                       <div class="info-box bg-gradient-success">
-                                        <span class="info-box-icon"><i class="fas fa-weight-hanging"></i></span>
-
-                                        <div class="info-box-content">
-                                            <span class="info-box-number"><h1>41410 KG</h1></span>
-
-                                            <div class="progress">
-                                            <div class="progress-bar" style="width: 100%"></div>
-                                            </div>
-                                            <span class="progress-description">
-                                             Kamis, 16/07/2020 16:00
-                                            </span>
-                                        </div>
-                                        <!-- /.info-box-content -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row bg-light rmb-20">
-                                    <div class="col-md-12 p-2">
-                                        <!-- TOLERANCE -->
-                                        <b-form-group id="group-do-code" label="Toleransi :" label-for="first_number_plate" class="text-left">
-                                            <div class="row" style="margin-left:-35px;">
-                                                <div class="col-md-4 p-0 pr-1 text-right">
-                                                        <div class="btn-group btn-group-sm-left">
-                                                        <button type="button" class="btn btn-weighing" @click="setCountTolerance('-', 100)">-100</button>
-                                                        <button type="button" class="btn btn-weighing" @click="setCountTolerance('-', 10)">-10</button>
-                                                        <button type="button" class="btn btn-weighing" @click="setCountTolerance('-', 1)">-1</button>
-                                                    </div>
+                                    <!-- CATEGORY -->
+                                    <div class="row bg-light rmb-20">
+                                        <div class="col-md-12 p-2">
+                                            <b-form-group id="group-category" label="Kategori :" label-for="category" class="text-left">
+                                                <div @click="AddNewWeighingCategoryOptions()"
+                                                    style="color:#38c172;font-weight:bold;cursor:pointer;margin-top:-24px;margin-left:73px;width:15px"
+                                                    id='tooltip-add-category'
+                                                >
+                                                    <i class="far fa-plus-square"></i>
+                                                    <b-tooltip placement="top" target="tooltip-add-category" title="Tambah Master Kategori Penimbangan"></b-tooltip>
                                                 </div>
-                                                <div class="col-md-4 p-0">
-                                                <validation-provider mode="passive" name="Berat Akhir" :rules="{required: true}" v-slot="{ errors }">
+                                                <validation-provider mode="passive" name="Kategori" :rules="{required: true}" v-slot="{ errors }">
+                                                    <v-select
+                                                        label="name"
+                                                        v-model="firstForm.weighing_category_id"
+                                                        :options="weighingCategoryOptions"
+                                                        :reduce="name => name.id"
+                                                    >
+                                                        <template slot="no-options">
+                                                            <div @click="AddNewWeighingCategoryOptions()" style="color:#38c172;font-weight:bold;cursor:pointer">
+                                                                <i class="far fa-plus-square"></i> Tambah Master Kategori Penimbangan
+                                                            </div>
+                                                        </template>
+                                                    </v-select>
+
+                                                    <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                                </validation-provider>
+                                            </b-form-group>
+                                        </div>
+                                    </div>
+                                    <!-- SPK BS -->
+                                    <div class="row bg-light rmb-20" v-if="firstForm.weighing_category_id==1">
+                                        <div class="col-md-4 p-2">
+                                            <b-form-group id="group-junk-item-request-code" label="SPK BS :" label-for="junk_item_request_code" class="text-left">
+                                                <validation-provider mode="passive" name="SPK BS" :rules="{required: true}" v-slot="{ errors }">
+                                                    <v-select
+                                                        label="name"
+                                                        v-model="firstForm.junk_item_request_code"
+                                                        :options="SpkBsOptions"
+                                                        :reduce="name => name.id"
+                                                    >
+                                                        <template slot="no-options">
+                                                           SPK BS Tidak ditemukan
+                                                        </template>
+                                                    </v-select>
+                                                    <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                                </validation-provider>
+                                            </b-form-group>
+                                        </div>
+                                        <div class="col-md-8 p-2">
+                                            <b-form-group id="group-junk-item-request-detail-id" label="Barang :" label-for="junk_item_request_detail_id" class="text-left">
+                                                <validation-provider mode="passive" name="Barang" :rules="{required: true}" v-slot="{ errors }">
+                                                    <v-select
+                                                        label="name"
+                                                        v-model="firstForm.junk_item_request_detail_id"
+                                                        :options="SpkBsItemOptions"
+                                                        :reduce="name => name.id"
+                                                    >
+                                                        <template slot="no-options">
+                                                           Barang Tidak ditemukan
+                                                        </template>
+                                                    </v-select>
+                                                    <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                                </validation-provider>
+                                            </b-form-group>
+                                        </div>
+                                    </div>
+                                    <!-- PO -->
+                                    <div class="row bg-light rmb-20"  v-if="firstForm.weighing_category_id==2">
+                                        <div class="col-md-4 p-2">
+                                            <b-form-group id="group-purchase-order-code" label="PO :" label-for="purchase_order_code" class="text-left">
+                                                <validation-provider mode="passive" name="PO" :rules="{required: true}" v-slot="{ errors }">
+                                                    <v-select
+                                                        label="name"
+                                                        v-model="firstForm.purchase_order_code"
+                                                        :options="PoOptions"
+                                                        :reduce="name => name.id"
+                                                    >
+                                                        <template slot="no-options">
+                                                           PO Tidak ditemukan
+                                                        </template>
+                                                    </v-select>
+                                                    <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                                </validation-provider>
+                                            </b-form-group>
+                                        </div>
+                                        <div class="col-md-8 p-2">
+                                            <b-form-group id="group-purchasing-purchase-order-item-id" label="Barang :" label-for="purchasing_purchase_order_item_id" class="text-left">
+                                                <validation-provider mode="passive" name="Barang" :rules="{required: true}" v-slot="{ errors }">
+                                                    <v-select
+                                                        label="name"
+                                                        v-model="firstForm.purchasing_purchase_order_item_id"
+                                                        :options="PoItemOptions"
+                                                        :reduce="name => name.id"
+                                                    >
+                                                        <template slot="no-options">
+                                                           Barang Tidak ditemukan
+                                                        </template>
+                                                    </v-select>
+                                                    <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                                </validation-provider>
+                                            </b-form-group>
+                                        </div>
+                                    </div>
+                                    <!-- OTHER -->
+                                    <div class="row bg-light rmb-20"  v-if="firstForm.weighing_category_id==null || firstForm.weighing_category_id==3">
+                                        <div class="col-md-12 p-2">
+                                            <b-form-group id="group-do-code" label="Barang :" label-for="weighing_item_code" class="text-left">
+                                                 <div @click="AddNewWeighingItemOptions()"
+                                                    style="color:#38c172;font-weight:bold;cursor:pointer;margin-top:-24px;margin-left:73px;width:15px"
+                                                    id='tooltip-add-item'
+                                                >
+                                                    <i class="far fa-plus-square"></i>
+                                                    <b-tooltip placement="top" target="tooltip-add-item" title="Tambah Master Barang Penimbangan"></b-tooltip>
+                                                </div>
+                                                <validation-provider mode="passive" name="Barang" :rules="{required: true}" v-slot="{ errors }">
+                                                    <v-select
+                                                        label="name"
+                                                        v-model="firstForm.weighing_item_code"
+                                                        :options="weighingItemOptions"
+                                                        :reduce="name => name.code"
+                                                    >
+                                                         <template slot="no-options">
+                                                            <div @click="AddNewWeighingItemOptions()" style="color:#38c172;font-weight:bold;cursor:pointer">
+                                                                <i class="far fa-plus-square"></i> Tambah Master Barang Penimbangan
+                                                            </div>
+                                                        </template>
+                                                    </v-select>
+                                                    <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                                </validation-provider>
+                                            </b-form-group>
+                                        </div>
+                                    </div>
+                                    <!-- SUPPLIER -->
+                                    <div class="row bg-light rmb-20">
+                                        <div class="col-md-4 p-2 bg">
+                                            <b-form-group id="group-do-code" label="Nomor surat jalan :" label-for="do_code" class="text-left">
+                                                <validation-provider mode="passive" name="Nomor surat jalan" :rules="{required: true}" v-slot="{ errors }">
                                                     <b-form-input
-                                                        v-model="firstForm.tolerance_weight"
-                                                        type="number"
-                                                        placeholder="Masukan berat"
+                                                        id="do_code"
+                                                        v-model="firstForm.do_code"
+                                                        type="text"
+                                                        placeholder=""
                                                         autocomplete="off"
-                                                        @blur="checkQuantityTolerance(firstForm.tolerance_weight)"
-                                                        class="form-control form-control-lg-weighing text-center"
+                                                        class="form-control form-control-lg text-left"
                                                     ></b-form-input>
                                                     <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
                                                 </validation-provider>
+                                            </b-form-group>
+                                        </div>
+                                        <div class="col-md-8 p-2 bg">
+                                            <b-form-group id="group-do-code" label="Supplier :" label-for="supplier_name" class="text-left">
+                                                <validation-provider mode="passive" name="Supplier" :rules="{required: true}" v-slot="{ errors }">
+                                                    <b-form-input
+                                                        id="supplier_name"
+                                                        v-model="firstForm.supplier_name"
+                                                        type="text"
+                                                        placeholder=""
+                                                        autocomplete="off"
+                                                        class="form-control form-control-lg text-left"
+                                                    ></b-form-input>
+                                                    <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                                </validation-provider>
+                                            </b-form-group>
+                                        </div>
+                                    </div>
+                                    <!-- DELIVER -->
+                                    <div class="row bg-light rmb-20">
+                                        <div class="col-md-4 p-2">
+                                            <b-form-group id="group-do-code" label="No mobil/polisi :" label-for="first_number_plate" class="text-left">
+                                                <validation-provider mode="passive" name="No mobil/polisi" :rules="{required: true}" v-slot="{ errors }">
+                                                    <b-form-input
+                                                        id="first_number_plate"
+                                                        v-model="firstForm.first_number_plate"
+                                                        type="text"
+                                                        placeholder=""
+                                                        autocomplete="off"
+                                                        class="form-control form-control-lg text-left"
+                                                    ></b-form-input>
+                                                    <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                                </validation-provider>
+                                            </b-form-group>
+                                        </div>
+                                        <div class="col-md-8 p-2">
+                                            <b-form-group id="group-do-code" label="Supir :" label-for="driver_name" class="text-left">
+                                                <validation-provider mode="passive" name="Supir" :rules="{required: true}" v-slot="{ errors }">
+                                                    <b-form-input
+                                                        id="driver_name"
+                                                        v-model="firstForm.driver_name"
+                                                        type="text"
+                                                        placeholder=""
+                                                        autocomplete="off"
+                                                        class="form-control form-control-lg text-left"
+                                                    ></b-form-input>
+                                                    <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                                </validation-provider>
+                                            </b-form-group>
+                                        </div>
+                                    </div>
+                                <!-- E : LEFT -->
+                            </div>
+                            <div class="col-md-5 p-2">
+                                <!-- B : RIGHT -->
+                                    <div class="row bg-light rmb-20">
+                                        <div class="col-md-12 p-2">
+                                            <!-- WEIGHING -->
+                                        <div class="info-box bg-gradient-success">
+                                            <span class="info-box-icon"><i class="fas fa-weight-hanging"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-number"><h1>41.410 KG</h1></span>
+
+                                                <div class="progress">
+                                                <div class="progress-bar" style="width: 100%"></div>
                                                 </div>
-                                                <div class="col-md-4 p-0 pl-1 text-left">
-                                                    <div class="btn-group btn-group-sm-right m-0 ">
-                                                        <button type="button" class="btn btn-weighing" @click="setCountTolerance('+', 1)">+1</button>
-                                                        <button type="button" class="btn btn-weighing" @click="setCountTolerance('+', 10)">+10</button>
-                                                        <button type="button" class="btn btn-weighing" @click="setCountTolerance('+', 100)">+100</button>
-                                                    </div>
-                                                </div>
+                                                <span class="progress-description">
+                                                Yohanes Setiawan - 16/07/2020 16:00
+                                                </span>
                                             </div>
+                                            <!-- /.info-box-content -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row bg-light rmb-20">
+                                        <div class="col-md-12 p-2">
+                                            <!-- TOLERANCE -->
+                                            <b-form-group id="group-do-code" label="Toleransi :" label-for="first_number_plate" class="text-left">
+                                                <table width="100%" border='0' celpading="0" celspacing="0">
+                                                    <tr>
+                                                        <td width="20%">
+                                                            <div class="btn-group btn-group-lg-left">
+                                                                <button type="button" class="btn btn-weighing-lg" @click="setCountTolerance('-', 100)">-100</button>
+                                                                <button type="button" class="btn btn-weighing-lg" @click="setCountTolerance('-', 10)">-10</button>
+                                                                <button type="button" class="btn btn-weighing-lg" @click="setCountTolerance('-', 1)">-1</button>
+                                                            </div>
+                                                        </td>
+                                                        <td width="*">
+                                                            <validation-provider mode="passive" name="Berat Akhir" :rules="{required: true}" v-slot="{ errors }">
+                                                                <b-form-input
+                                                                    v-model="firstForm.tolerance_weight"
+                                                                    type="number"
+                                                                    placeholder="Masukan berat"
+                                                                    autocomplete="off"
+                                                                    @blur="checkQuantityTolerance(firstForm.tolerance_weight)"
+                                                                    class="form-control form-control-lg-weighing text-center"
+                                                                ></b-form-input>
+                                                                <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                                            </validation-provider>
+                                                        </td>
+                                                        <td width="20%">
+                                                            <div class="btn-group btn-group-lg-right">
+                                                                <button type="button" class="btn btn-weighing-lg" @click="setCountTolerance('+', 1)">+1</button>
+                                                                <button type="button" class="btn btn-weighing-lg" @click="setCountTolerance('+', 10)">+10</button>
+                                                                <button type="button" class="btn btn-weighing-lg" @click="setCountTolerance('+', 100)">+100</button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </b-form-group>
+                                        </div>
+                                    </div>
+                                    <div class="row bg-light rmb-20">
+                                        <div class="col-md-12 p-2" v-if="firstForm.tolerance_weight>0">
+                                        <!-- Tolerance Reason -->
+                                        <b-form-group id="group-tolerance-reason" label="Alasan Toleransi :" label-for="tolerance_reason" class="text-left">
+                                            <validation-provider mode="passive" name="Alasan Toleransi" :rules="{required: true}" v-slot="{ errors }">
+                                                <b-form-textarea
+                                                    id="tolerance_reason"
+                                                    class="form-control form-textarea"
+                                                    placeholder="Alasan Toleransi"
+                                                    v-model="firstForm.tolerance_reason"
+                                                    rows="2"
+                                                    no-resize
+                                                >
+                                                </b-form-textarea>
+                                                <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                            </validation-provider>
                                         </b-form-group>
                                     </div>
-                                </div>
-                                <div class="row bg-light rmb-20">
-                                    <div class="col-md-12 p-2" v-if="firstForm.tolerance_weight>0">
-                                    <!-- Tolerance Reason -->
-                                    <b-form-group id="group-tolerance-reason" label="Alasan Toleransi :" label-for="tolerance_reason" class="text-left">
-                                        <validation-provider mode="passive" name="Alasan Toleransi" :rules="{required: true}" v-slot="{ errors }">
-                                            <b-form-textarea
-                                                id="tolerance_reason"
-                                                class="form-control form-textarea"
-                                                placeholder="Alasan Toleransi"
-                                                v-model="firstForm.tolerance_reason"
-                                                rows="4"
-                                                no-resize
-                                            >
-                                            </b-form-textarea>
-                                            <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
-                                        </validation-provider>
-                                    </b-form-group>
-                                </div>
-                                </div>
+                                    </div>
+                                <!-- E : RIGHT -->
                             </div>
                         </div>
-
-
-
                         <button type="submit" class="d-none">Kirim</button>
                     </b-form>
                 </validation-observer>
@@ -314,7 +456,7 @@
             </template>
         </b-modal>
 
-        <!-- First Weighing -->
+        <!-- Second Weighing -->
         <b-modal ref="bv-modal-weighing-second-form" :title="modalTitle" footer-class="p-2" size="xl" no-close-on-backdrop hide-header-close>
             <div class="d-block text-center px-3 py-2">
                 <validation-observer ref="observerSecondForm" v-slot="{ invalid }" tag="form" @submit.prevent="submitSecondForm()">
@@ -353,7 +495,7 @@
                             <div class="col-md-12">
                                 <!-- Name -->
                                 <b-form-group id="group-name" label="Nama:" label-for="name" class="text-left">
-                                    <validation-provider mode="passive" name="Nama" :rules="{required: true, unique: { url: urlWeighingCategoryCheckNameExist, id: form.id }}" v-slot="{ errors }">
+                                    <validation-provider mode="passive" name="Nama" :rules="{required: true, unique: { url: urlWeighingCategoryCheckNameExist, id: formItem.id }}" v-slot="{ errors }">
                                         <b-form-input
                                             id="name"
                                             v-model="formCategory.name"
@@ -371,7 +513,7 @@
                             <div class="col-md-12">
                                 <!-- Description -->
                                 <b-form-group id="group-description" label="Deskripsi:" label-for="description" class="text-left">
-                                    <validation-provider mode="passive" name="Deskripsi" v-slot="{ errors }">
+                                    <validation-provider mode="passive" name="Deskripsi" :rules="{required: true }" v-slot="{ errors }">
                                         <b-form-textarea
                                             id="description"
                                             class="form-control"
@@ -399,6 +541,67 @@
                         Kirim
                     </button>
                     <button class="btn btn-sm btn-outline-danger border-0" @click="hideModal('bv-modal-category-form')">
+                        Batal
+                    </button>
+                </div>
+            </template>
+        </b-modal>
+
+        <!-- Modal Item -->
+        <b-modal ref="bv-modal-item-form" :title="modalTitleNewAdd" footer-class="p-2" no-close-on-backdrop>
+            <div class="d-block text-center px-3 py-2">
+                <validation-observer ref="observerItem" v-slot="{ invalid }" tag="form" @submit.prevent="submitNeweighingItemOptionForm()">
+                    <b-form @submit.prevent="submitNeweighingItemOptionForm">
+                        <div class="row bg-light rmb-20">
+                            <div class="col-md-12">
+                                <!-- Name -->
+                                <b-form-group id="group-name" label="Nama:" label-for="name" class="text-left">
+                                    <validation-provider mode="passive" name="Nama" :rules="{required: true, unique: { url: urlWeighingCategoryCheckNameExist, id: formItem.code }}" v-slot="{ errors }">
+                                        <b-form-input
+                                            id="name"
+                                            v-model="formItem.name"
+                                            type="text"
+                                            required
+                                            placeholder="Masukan Nama"
+                                            autocomplete="off"
+                                            class="form-control form-control-sm"
+                                        ></b-form-input>
+                                        <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                    </validation-provider>
+                                </b-form-group>
+                            </div>
+
+                            <div class="col-md-12">
+                                <!-- Description -->
+                                <b-form-group id="group-description" label="Deskripsi:" label-for="description" class="text-left">
+                                    <validation-provider mode="passive" name="Deskripsi" :rules="{required: true }" v-slot="{ errors }">
+                                        <b-form-textarea
+                                            id="description"
+                                            class="form-control"
+                                            placeholder="Deskripsikan"
+                                            v-model="formItem.description"
+                                            rows="4"
+                                            no-resize
+                                        >
+                                        </b-form-textarea>
+
+                                        <span class="form-error-message" v-if="errors[0]">{{ errors[0] }}</span>
+                                    </validation-provider>
+                                </b-form-group>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="d-none">Kirim</button>
+                    </b-form>
+                </validation-observer>
+            </div>
+
+            <template v-slot:modal-footer>
+                <div class="w-100 m-0 text-center">
+                    <button class="btn btn-sm btn-primary" @click="submitNeweighingItemOptionForm()">
+                        Kirim
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger border-0" @click="hideModal('bv-modal-item-form')">
                         Batal
                     </button>
                 </div>
@@ -487,10 +690,29 @@ export default {
             required: true,
             type: String,
         },
+
+        urlWeighingItemData: {
+            required: true,
+            type: String,
+        },
+        urlWeighingItemStore: {
+            required: true,
+            type: String,
+        },
+        urlWeighingItemCheckNameExist: {
+            required: true,
+            type: String,
+        },
     },
     data(){
         return {
             tab:'weighing',
+            weighingItemOptions: [],
+            weighingCategoryOptions: [],
+            SpkBsOptions: [],
+            SpkBsItemOptions: [],
+            PoOptions: [],
+            PoItemOptions: [],
             modalTitle: undefined,
             modalTitleNewAdd: undefined,
             firstForm : {
@@ -517,12 +739,27 @@ export default {
                 first_weight: null,
                 url:null,
                 method: 'POST',
-
+            },
+            formCategory: {
+                id: null,
+                name: null,
+                description: null,
+                url: this.urlWeighingCategoryStore,
+                method: 'POST'
+            },
+            formItem: {
+                id: null,
+                name: null,
+                description: null,
+                url: this.urlWeighingItemStore,
+                method: 'POST'
             },
         }
     },
     mounted(){
         this.tabDefault();
+        this.loadWeighingCategoryOptions()
+        this.loadWeighingItemOptions()
     },
     methods: {
         tabDefault(){
@@ -624,7 +861,115 @@ export default {
             }
         },
 
+        // Weighing Category
+        loadWeighingCategoryOptions(){
+            axios.get(window.location.origin + '/wh/weighing-category/api/v1/weighing-category-options')
+            .then(response => {
+                this.weighingCategoryOptions = response.data.data
+                this.weighingCategoryOptions.unshift({ id: null, name: 'Pilih Kategori' })
+            })
+            .catch(error => console.log(error));
+        },
+        AddNewWeighingCategoryOptions:function(index){
+            this.modalTitleNewAdd = 'Tambah Kategori Penimbangan'
+            this.formCategory.url = this.urlWeighingCategoryStore
+            this.formCategory.id = null
+            this.formCategory.name = null
+            this.formCategory.description = null
+            this.formCategory.method = 'POST'
+            this.$refs['bv-modal-category-form'].show()
+        },
+        async submitNeweighingCategoryOptionForm() {
+            const isValid = await this.$refs.observerCategory.validate();
+            if (!isValid) {
+                return
+            }
 
+            axios({
+                method: this.formCategory.method,
+                url: this.formCategory.url,
+                data: {
+                    name: this.formCategory.name,
+                    description: this.formCategory.description,
+                }
+            })
+                .then(response => {
+                    this.hideModal('bv-modal-category-form', 'process')
+                    this.loadWeighingCategoryOptions()
+                    this.$notify({
+                        title: 'Sukses',
+                        message: response.data.message,
+                        type: 'success',
+                    })
+                    this.firstForm.weighing_category_id = response.data.id
+                })
+                .catch(error => {
+                    const errorResponse = error.response
+
+                    if (errorResponse.status !== 422) {
+                        this.$message({
+                            showClose: true,
+                            message: 'Oops, Sepertinya error nih, mohon dicoba kembali ya!',
+                            type: 'error'
+                        });
+                    }
+                })
+        },
+
+        // Weighing Item
+        loadWeighingItemOptions(){
+            axios.get(window.location.origin + '/wh/weighing-item/api/v1/weighing-item-options')
+            .then(response => {
+                this.weighingItemOptions = response.data.data
+                this.weighingItemOptions.unshift({ id: null, name: 'Pilih Barang' })
+            })
+            .catch(error => console.log(error));
+        },
+        AddNewWeighingItemOptions:function(index){
+            this.modalTitleNewAdd = 'Tambah Barang Penimbangan'
+            this.formItem.url = this.urlWeighingItemStore
+            this.formItem.code = null
+            this.formItem.name = null
+            this.formItem.description = null
+            this.formItem.method = 'POST'
+            this.$refs['bv-modal-item-form'].show()
+        },
+        async submitNeweighingItemOptionForm() {
+            const isValid = await this.$refs.observerItem.validate();
+            if (!isValid) {
+                return
+            }
+
+            axios({
+                method: this.formItem.method,
+                url: this.formItem.url,
+                data: {
+                    name: this.formItem.name,
+                    description: this.formItem.description,
+                }
+            })
+                .then(response => {
+                    this.hideModal('bv-modal-item-form', 'process')
+                    this.loadWeighingItemOptions()
+                    this.$notify({
+                        title: 'Sukses',
+                        message: response.data.message,
+                        type: 'success',
+                    })
+                    this.firstForm.weighing_item_code = response.data.code
+                })
+                .catch(error => {
+                    const errorResponse = error.response
+
+                    if (errorResponse.status !== 422) {
+                        this.$message({
+                            showClose: true,
+                            message: 'Oops, Sepertinya error nih, mohon dicoba kembali ya!',
+                            type: 'error'
+                        });
+                    }
+                })
+        },
 
     }
 }

@@ -42,6 +42,7 @@ Vue.component('validation-provider', ValidationProvider);
 Vue.component('weighing-main', require('./pages/warehouses/weighing/WeighingMain.vue').default);
 Vue.component('weighing-table-records', require('./pages/warehouses/weighing/Weighing.vue').default);
 Vue.component('weighing-category-table-records', require('./pages/warehouses/weighing/WeighingCategory.vue').default);
+Vue.component('weighing-item-table-records', require('./pages/warehouses/weighing/WeighingItem.vue').default);
 Vue.component('weighing-detail', require('./pages/warehouses/weighing/WeighingDetail.vue').default);
 
 const app = new Vue({

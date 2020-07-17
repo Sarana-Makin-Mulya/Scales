@@ -31,6 +31,10 @@
                 url-weighing-category-data="{{ route('ajax.wh.get.weighing.category') }}"
                 url-weighing-category-store="{{ route('wh.weighing.category.store') }}"
                 url-weighing-category-check-name-exist="{{ route('ajax.stock.check.weighing.category.name.exist') }}"
+
+                url-weighing-item-data="{{ route('ajax.wh.get.weighing.item') }}"
+                url-weighing-item-store="{{ route('wh.weighing.item.store') }}"
+                url-weighing-item-check-name-exist="{{ route('ajax.stock.check.weighing.item.name.exist') }}"
             ></weighing-main>
         </section>
     </section>
