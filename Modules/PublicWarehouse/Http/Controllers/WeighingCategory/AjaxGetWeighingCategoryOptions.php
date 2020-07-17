@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\PublicWarehouse\Http\Controllers\Weighing;
+namespace Modules\PublicWarehouse\Http\Controllers\WeighingCategory;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,7 +13,7 @@ class AjaxGetWeighingCategoryOptions extends Controller
     public function __invoke(Request $request)
     {
         $items = WeighingCategory::query()
-            ->orderBy('name', 'ASC')
+            ->orderBy('id', 'ASC')
             ->get();
 
         return WeighingCategoryOptionsResource::collection($items);

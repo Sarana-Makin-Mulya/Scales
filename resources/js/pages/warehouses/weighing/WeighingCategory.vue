@@ -13,7 +13,7 @@
                         name="search"
                         v-model="queryParams.keyword"
                         class="form-control form-control-sm search-form"
-                        placeholder="Cari Penadah Barang Sampah"
+                        placeholder="Cari Kategori Penimbangan"
                         @change="search()"
                     >
                     <button
@@ -26,7 +26,7 @@
                             <div class="dropdown-menu" role="menu" x-placement="bottom-start">
                                 <a class="dropdown-item" href="#">
                                     <download-excel
-                                        title = "Daftar Penadah Barang Sampah"
+                                        title = "Daftar Kategori Penimbangan"
                                         :fetch   = "fetchData"
                                         :fields = "json_fields"
                                         worksheet = "My Worksheet"
@@ -41,7 +41,7 @@
                             @click.prevent="addForm()"
                             class="btn btn-primary btn-sm"
                             data-toggle="tooltip"
-                            title="Tambah Data Penadah Barang Samah"
+                            title="Tambah Data Kategori Penimbangan"
                         >
                             <i class="fas fa-plus-square"></i> Tambah
                         </a>
@@ -315,7 +315,7 @@ export default {
                     }
                 ]
             ],
-            fileName: 'master kategori-penimbangan' + moment().format("DD-MM-YYYY HH:MM")+ '.xls',
+            fileName: 'master-kategori-penimbangan' + moment().format("DD-MM-YYYY HH:MM")+ '.xls',
         }
     },
     methods: {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\PublicWarehouse\Http\Controllers\Weighing;
+namespace Modules\PublicWarehouse\Http\Controllers\WeighingCategory;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
