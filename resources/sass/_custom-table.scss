@@ -1,0 +1,36 @@
+table {
+    font-size: 0.80rem;
+}
+
+.table th, .table td {
+    padding: 0.25rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+
+.custom-table {
+    color: #333;
+
+    thead {
+        th {
+            padding: 8px 3px;
+        }
+    }
+
+    td {
+        padding: 3px;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .action-button {
+        margin: 0 3px;
+    }
+}
+
+.page-item.active .page-link {
+    color: #ffffff;
+    background-color: $primary;
+    border-color: $primary;
+}

@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/publicwarehouse",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\PublicWarehouse\\Providers\\PublicWarehouseServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\PublicWarehouse\\": ""
+        }
+    }
+}

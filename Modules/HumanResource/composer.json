@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/humanresource",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\HumanResource\\Providers\\HumanResourceServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\HumanResource\\": ""
+        }
+    }
+}

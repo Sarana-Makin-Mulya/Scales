@@ -1,0 +1,61 @@
+// Fonts
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Font awesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+// @import '~@fortawesome/fontawesome-free/scss/brands.scss';
+
+// Ionicons
+@import "~ionicons/dist/css/ionicons.min.css";
+
+// Vendor
+@import '~overlayscrollbars/css/OverlayScrollbars.min.css';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
+@import '~element-theme-chalk';
+@import '~admin-lte/build/scss/AdminLTE';
+@import '~vue-select/src/scss/vue-select.scss';
+
+//custom
+// @import '../component/general.scss';
+// @import '../component/sidebar.scss';
+// @import '../component/breadcrumb.scss';
+@import 'custom-table';
+@import 'custom-form';
+@import 'custom-navbar';
+@import 'custom-sidebar';
+@import 'custom-general';
+@import 'custom-modal';
+@import 'custom-footer';
+@import 'custom-storage-map';
+
+.content-wrapper {
+    background-color: $young-navy// #606367;
+}
+
+.search-form {
+    max-width: 200px;
+    border-radius: 1rem;
+    display: inline;
+    background-color: #e8e8e8;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.select-per-page {
+    border-radius: 1rem;
+    width: 60px;
+    background-color: #e8e8e8;
+    height: 23px !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0.5rem;
+}
+
+.custom-select-sm {
+    font-size: 90% !important;
+}

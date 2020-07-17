@@ -1,0 +1,13 @@
+{
+    "name": "PublicWarehouse",
+    "alias": "publicwarehouse",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\PublicWarehouse\\Providers\\PublicWarehouseServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

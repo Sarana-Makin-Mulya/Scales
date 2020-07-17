@@ -1,0 +1,60 @@
+// Card
+
+.card-title {
+    float: left;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 0;
+    line-height: 35px;
+}
+
+.card-title i.nav-icon {
+    color: $primary;
+}
+
+.card-header {
+    padding: 0.35rem 0.85rem;
+}
+
+.card-body {
+    padding: 0.85rem;
+}
+
+// Button
+
+.btn {
+    padding: 0.275rem 0.75rem;
+}
+
+.btn-action{
+    padding: 3px 8px; 
+    min-width: 35px; 
+}
+
+.btn-cancel {
+    color: $danger;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+// Table
+
+table {
+    font-size: 0.85rem;
+}
+.table th, .table td {
+    padding: 0.45rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+// input
+div.custom-control.custom-checkbox{
+ padding:0px 0px 0px 40px;
+}
+
+// modal
+.modal-header {
+    padding: 0.5rem 1rem;
+}

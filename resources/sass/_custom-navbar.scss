@@ -1,0 +1,13 @@
+.navbar-dark {
+    background-color: $navy;
+}
+
+.main-header {
+    border-bottom: 1px solid $young-navy;// #4b545c;
+}
+
+.navbar-nav > .user-menu .user-image {
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+}

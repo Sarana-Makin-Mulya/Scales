@@ -1,0 +1,22 @@
+.storage-map{
+    .box{
+        padding: 5px;
+        text-align: center;
+        min-height: 10px;
+        font-size: 10px;
+        color: #333333;
+    }
+
+    .box_available{
+        background-color: #F9F9F9;
+    }
+
+    .box_rack{
+        background-color: #F00;
+    }
+
+    td {
+        padding: 0px;
+    }
+}
+

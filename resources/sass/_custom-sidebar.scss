@@ -1,0 +1,43 @@
+.sidebar-dark-secondary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-secondary .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: $gold-dark !important;
+    color: #ffffff;
+}
+
+.sub {margin-left:5px;font-size:14px;color:#3d506a}
+.sub-2 {margin-left:5px;font-size:14px;color:#3d506a}
+.sub-3 {margin-left:12px;font-size:14px;color:#3d506a}
+
+[class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link.active, [class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link.active:hover, [class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link.active:focus {
+    background-color: $young-navy !important;
+    color: #ffffff;
+
+    .sub {margin-left:5px;font-size:14px;color:#ffffff}
+    .sub-2 {margin-left:5px;font-size:14px;color:#ffffff}
+    .sub-3 {margin-left:12px;font-size:14px;color:#ffffff}
+}
+
+
+[class*=sidebar-dark-] {
+    background-color: $navy;
+}
+
+[class*=sidebar-dark] .brand-link {
+    border-bottom: 1px solid $young-navy;
+    color: rgba(255, 255, 255, 0.8);
+    min-height: 55px;
+    padding: 0.766rem 0.5rem;
+}
+
+.layout-navbar-fixed .wrapper .sidebar-dark-secondary .brand-link:not([class*=navbar]) {
+    background-color: $navy;
+}
+
+.img-responsive {
+    height: auto;
+    width: auto;
+    max-height: 72px;
+    max-width: 250px;
+}
+
+
+

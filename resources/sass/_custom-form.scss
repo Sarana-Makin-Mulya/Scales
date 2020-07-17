@@ -1,0 +1,149 @@
+label {
+    margin-bottom: 0;
+}
+
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: 100;
+}
+
+.form-error-message {
+    font-size: 0.7rem;
+    padding-left: 4px;
+    color: $danger;
+}
+.form-panel-border {
+    border:1px dashed #ddd;
+    margin:2px;
+    padding-bottom:10px;
+    border-radius:5px;
+    background-color:#F9F9F9;
+}
+
+.search-form {
+    max-width: 200px;
+    border-radius: 4px !important;
+    display: inline;
+    background-color: #FFF !important;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.form-panel-warning{
+    border:1px solid #E8E217;
+    background-color:#FFFFD2;
+    border-radius:4px
+}
+
+.form-panel-danger{
+    border:1px solid #F00;
+    background-color:#FFDFDF;
+    border-radius:4px
+}
+
+.info-box-kpi{
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    background: #e3342f; //#17a2b8;
+    margin-bottom: 1rem;
+    min-height: 140px;
+    padding: 0.5rem;
+    position: relative;
+    color:#f8f9fa;
+}
+
+.kpi-header {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.kpi-title {
+    line-height: 20px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.kpi-sub-title {
+    line-height: 20px;
+    font-size: 12px;
+}
+
+.kpi-content {
+    line-height: 20px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.form-capital{
+    text-transform: uppercase;
+}
+
+.form-control {
+    border: 1px solid rgba(60, 60, 60, 0.26);
+    font-size: 0.7875rem;
+}
+
+.form-group {
+    font-size: 1.0rem;
+}
+
+h5, .h5 {
+    font-size: 1.0rem;
+}
+
+.form-control-sm {
+    height: calc(1.68125rem + 5px) !important;
+    font-size: 0.7875rem;
+    line-height: 1.5;
+}
+
+.form-control-lg {
+    height: calc(1.68125rem + 14px) !important;
+    font-size: 1.0rem !important;
+
+}
+
+.form-textarea {
+    font-size: 1.0rem !important;
+
+}
+
+.search-form {
+    height: calc(1.68125rem + 2px) !important;
+}
+
+.btn-sm-weighing-left, .btn-group-sm-left > .btn {
+    padding: 0.65rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.5;
+    border-radius: 0.2rem 0rem 0rem 0.2rem;
+}
+
+.btn-sm-weighing-right, .btn-group-sm-right > .btn {
+    padding: 0.65rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.5;
+    border-radius: 0rem 0.2rem 0.2rem 0rem;
+}
+
+.form-control-lg-weighing {
+    height: calc(1.68125rem + 14px) !important;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.0rem !important;
+    line-height: 1.5;
+    border-radius: 0rem;
+}
+
+.btn-weighing {
+    background-color: #f8f9fa;
+    border: 1px solid rgba(60, 60, 60, 0.26);
+    color: #444;
+}
+
+.btn-weighing:hover {
+    background-color: #F1F1F1;
+    border: 1px solid rgba(60, 60, 60, 0.26);
+    color: #444;
+}
+

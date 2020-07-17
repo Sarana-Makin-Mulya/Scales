@@ -1,0 +1,100 @@
+
+body {
+    margin: 0;
+    font-family: "Nunito", sans-serif;
+    font-size: 0.85rem;
+}
+
+// vue2-datepicker
+.mx-datepicker-popup{
+ z-index: 1999 !important;
+}
+
+// Card
+.card-title {
+    float: left;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 0;
+    line-height: 35px;
+}
+
+.card-title i.nav-icon {
+    color: $primary;
+}
+
+.card-header {
+    padding: 0.35rem 0.85rem;
+}
+
+.card-body {
+    padding: 0.55rem;
+}
+
+.card-footer {
+    padding: 0.55rem 1.15rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 0 solid rgba(0, 0, 0, 0.125);
+}
+
+.content-header h1 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+a, a:hover {
+    color: $gold;
+}
+
+a.nav-link, a.nav-link:hover {
+    color: $navy;
+}
+
+a.preview {
+    color: $navy;
+}
+
+a.preview:hover {
+    color: $blue;
+}
+
+.rmb-20 {
+    margin-bottom:-20px;
+}
+
+// datepicker vue2-datepicker
+.mx-datepicker {
+    position: relative;
+    display: inline !important;
+}
+
+// widget Dashboard
+.widget-user-2 .widget-user-header {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    padding: 0.5rem;
+}
+.statistict .nav-link {
+    display: block;
+    padding: 0.43rem 1rem !important;
+}
+
+// Purchase Request
+.form-add-item-purchase-request {
+    border:1px solid #999999;
+    background-color:#F1F1F1;
+    border-radius:4px
+}
+
+.form-edit-item-purchase-request-blink {
+    border:1px solid #6cb2eb;
+    background-color:#CEE7FF;
+    border-radius:4px
+}
+
+.form-edit-item-purchase-request {
+    border:1px solid #E8E217;
+    background-color:#FFFFD2;
+    border-radius:4px
+}
+
