@@ -99,6 +99,7 @@ h5, .h5 {
 .form-control-lg {
     height: calc(1.68125rem + 14px) !important;
     font-size: 1.0rem !important;
+    padding: 0.5rem 0.5rem;
 
 }
 
@@ -111,16 +112,16 @@ h5, .h5 {
     height: calc(1.68125rem + 2px) !important;
 }
 
-.btn-sm-weighing-left, .btn-group-sm-left > .btn {
-    padding: 0.65rem 1rem;
+.btn-lg-weighing-left, .btn-group-lg-left > .btn {
+    padding: 0.65rem 0.7rem;
     font-size: 0.8rem;
     font-weight: 700;
     line-height: 1.5;
     border-radius: 0.2rem 0rem 0rem 0.2rem;
 }
 
-.btn-sm-weighing-right, .btn-group-sm-right > .btn {
-    padding: 0.65rem 1rem;
+.btn-lg-weighing-right, .btn-group-lg-right > .btn {
+    padding: 0.65rem 0.7rem;
     font-size: 0.8rem;
     font-weight: 700;
     line-height: 1.5;
@@ -131,6 +132,46 @@ h5, .h5 {
     height: calc(1.68125rem + 14px) !important;
     padding: 0.25rem 0.5rem;
     font-size: 1.0rem !important;
+    line-height: 1.5;
+    border-radius: 0rem;
+    min-width: 100px;
+}
+
+.btn-sm-weighing-left, .btn-group-sm-left > .btn {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.5875rem;
+    font-weight: 700;
+    line-height: 1.5;
+    border-radius: 0.2rem 0rem 0rem 0.2rem;
+}
+
+.btn-sm-weighing-right, .btn-group-sm-right > .btn {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.5875rem;
+    font-weight: 700;
+    line-height: 1.5;
+    border-radius: 0rem 0.2rem 0.2rem 0rem;
+    // border-left: 10px;
+
+}
+
+
+.btn-weighing-lg {
+    background-color: #EAEAEA;
+    border: 1px solid rgba(60, 60, 60, 0.26);
+    color: #444;
+}
+
+.btn-weighing-lg:hover {
+    background-color: #F1F1F1;
+    border: 1px solid rgba(60, 60, 60, 0.26);
+    color: #444;
+}
+
+.form-control-sm-weighing {
+    height: calc(1.68125rem + 5.5px);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7875rem;
     line-height: 1.5;
     border-radius: 0rem;
 }
