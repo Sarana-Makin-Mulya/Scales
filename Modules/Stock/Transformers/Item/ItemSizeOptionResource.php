@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\PurchaseOrder\Transformers;
+namespace Modules\Stock\Transformers\Item;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class JunkItemRequestDetailOptionsResource extends Resource
+class ItemSizeOptionResource extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,8 @@ class JunkItemRequestDetailOptionsResource extends Resource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'price' => $this->price,
-            'type' => $this->type,
-            'unit_id' => $this->unit_id,
+            'id' => $this->size,
+            'name' => $this->size,
         ];
     }
 }
