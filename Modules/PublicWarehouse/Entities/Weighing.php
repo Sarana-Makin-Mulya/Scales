@@ -31,8 +31,8 @@ class Weighing extends Model
 
     protected $fillable = [
         'weighing_category_id',
-        'junk_item_request_code',
-        'junk_item_request_detail_id',
+        'junk_item_spk_code',
+        'junk_item_spk_detail_id',
         'purchase_order_code',
         'purchasing_purchase_order_item_id',
         'weighing_item_code',
