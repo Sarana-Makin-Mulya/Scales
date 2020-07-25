@@ -18,8 +18,8 @@ class PurchaseOrderItemOptionsResource extends Resource
             'id' => $this->id,
             'purchasing_purchase_order_code' => $this->purchasing_purchase_order_code,
             'item_code' => $this->item_code,
-            //'item_dev' => getItemName($this->supplier_name),
-            // 'item_detail' => getItemPreview($this->supplier_name),
+            'item_dev' => getItemName($this->item_code),
+            'detail' => getItemPreview($this->item_code)." (".$this->quantity." ".getUnitConversionName($this->item_unit_conversion_id).")",
         ];
     }
 }

@@ -13,6 +13,7 @@ class AjaxGetPurchaseOrderItemOptions extends Controller
     public function __invoke(Request $request)
     {
         $requests = PurchaseOrderItems::query()
+            ->where('purchasing_purchase_order_code', $request->code)
             ->where('status', '<', 5)
             ->get();
 

@@ -17,10 +17,15 @@ Route::group(['prefix' => 'wh', 'middleware' => 'auth'], function () {
     Route::group(['prefix' => 'weighing'], function () {
         Route::get('/', 'Weighing\WeighingController@index')
             ->name('wh.weighing.index');
-        Route::post('/store', 'Weighing\WeighingController@store')
-            ->name('wh.weighing.store');
+
+        Route::post('/first-store', 'Weighing\WeighingController@firstStore')
+            ->name('wh.weighing.first.store');
+        Route::post('/second-store', 'Weighing\WeighingController@secondStore')
+            ->name('wh.weighing.second.store');
+
         Route::put('/update/{id}', 'Weighing\WeighingController@update')
             ->name('wh.weighing.update');
+
         Route::post('/download-weighing', 'Weighing\WeighingController@Download')
             ->name('po.weighing.download');
 
@@ -28,6 +33,12 @@ Route::group(['prefix' => 'wh', 'middleware' => 'auth'], function () {
             // Get Data
             Route::get('weighing', 'Weighing\AjaxGetWeighing')
                 ->name('ajax.wh.get.weighing');
+            // First Weighing Options
+            Route::get('first-weighing-options', 'Weighing\AjaxGetFirstWeighingOptions')
+                ->name('ajax.wh.get.first.weighing.options');
+            // Detail
+            Route::get('edit-weighing/{id}', 'Weighing\AjaxGetEditWeighing')
+                ->name('ajax.wh.edit.weighing');
             // Detail
             Route::get('detail-weighing/{id}', 'Weighing\AjaxGetDetailWeighing')
                 ->name('ajax.wh.detail.weighing');

@@ -12,11 +12,16 @@
 */
 
 Route::group(['prefix' => 'po', 'middleware' => 'auth'], function () {
+
     Route::group(['prefix' => 'api/v1'], function () {
-        Route::get('junk-item-request-options', 'AjaxGetJunkItemRequestOptions')
-            ->name('ajax.po.get.junk.item.request.options');
-        Route::get('junk-item-request-detail-options', 'AjaxGetJunkItemRequestDetailOptions')
-            ->name('ajax.po.get.junk.item.request.detail.options');
+        Route::get('user-data', 'AjaxGetUserData')
+            ->name('ajax.po.get.user.data');
+        Route::get('get-supplier', 'AjaxGetSupplier')
+            ->name('ajax.po.get.supplier');
+        Route::get('junk-item-spk-options', 'AjaxGetJunkItemSpkOptions')
+            ->name('ajax.po.get.junk.item.spk.options');
+        Route::get('junk-item-spk-detail-options', 'AjaxGetJunkItemSpkDetailOptions')
+            ->name('ajax.po.get.junk.item.spk.detail.options');
         Route::get('purchase-order-options', 'AjaxGetPurchaseOrderOptions')
             ->name('ajax.po.get.purchase.order.options');
         Route::get('purchase-order-item-options', 'AjaxGetPurchaseOrderItemOptions')
