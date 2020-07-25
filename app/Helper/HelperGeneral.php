@@ -7,6 +7,7 @@ use Modules\General\Entities\NotificationRead;
 use Modules\PublicWarehouse\Entities\GoodsRequestReturn;
 use Modules\PublicWarehouse\Entities\Weighing;
 use Modules\PublicWarehouse\Entities\WeighingCategory;
+use Modules\PublicWarehouse\Entities\WeighingItems;
 use Modules\PurchaseOrder\Entities\JunkItem;
 use Modules\PurchaseOrder\Entities\JunkItemPrice;
 use Modules\PurchaseOrder\Entities\PurchaseOrder;
@@ -17,6 +18,14 @@ if (! function_exists('getWeighingCategoryName')) {
     function getWeighingCategoryName($id)
     {
         $data  = WeighingCategory::where('id',$id)->first();
+        return !empty($data) ? $data->name : '';
+    }
+}
+
+if (! function_exists('getWeighingItemName')) {
+    function getWeighingItemName($code)
+    {
+        $data  = WeighingItems::where('code',$code)->first();
         return !empty($data) ? $data->name : '';
     }
 }
