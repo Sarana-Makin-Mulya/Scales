@@ -45,11 +45,16 @@
                     </template>
 
                     <template v-slot:cell(netto_weight)="data">
-                        {{ data.value }} Kg
+                        {{ formatNumber(data.value) }} Kg
                     </template>
 
                     <template v-slot:cell(first_datetime)="data">
                         {{ data.value | moment_datetime }}
+                    </template>
+
+                     <template v-slot:cell(stage)="data">
+                        <span v-if="data.value==1" class="badge badge-pill badge-warning">Penimbangan Pertama</span>
+                        <span v-if="data.value==2" class="badge badge-pill badge-success">Penimbangan Kedua</span>
                     </template>
 
                     <!-- Action -->
@@ -67,7 +72,7 @@
                         </a>
 
                         <!-- Edit Button  -->
-                        <a
+                        <!-- <a
                             href="#"
                             @click.prevent="editForm(data.item)"
                             class="action-button text-secondary"
@@ -75,7 +80,7 @@
                             title="Ubah data"
                         >
                             <i class="fas fa-edit"></i>
-                        </a>
+                        </a> -->
 
                         <!-- Delete Button  -->
                         <!-- <a
@@ -137,8 +142,8 @@
         </div>
 
         <!-- Modal Preivew-->
-        <b-modal ref="bv-modal-preview" :title="modalTitle" footer-class="p-2" size="lg" ok-only>
-            <div class="d-block text-center px-3 py-2">
+        <b-modal ref="bv-modal-preview" :title="modalTitle" footer-class="p-2" size="xl" ok-only>
+            <div>
                <weighing-detail
                 :id='previewId'
                >
@@ -685,6 +690,18 @@ export default {
             required: true,
             type: String,
         },
+        newData: {
+            required: false,
+            type: Number,
+        },
+        newStatus: {
+            required: false,
+            type: String,
+        },
+        newChanged: {
+            required: false,
+            type: Boolean,
+        },
     },
     data() {
         return {
@@ -734,10 +751,13 @@ export default {
             isBusy: false,
             fields: [
                 { key: 'index', label: '#', thStyle: 'text-align: center; width: 35px;', tdClass: 'custom-cell text-center' },
-                { key: 'weighing_category_name', label: 'Penimbangan', thStyle: 'text-align: left;', tdClass: 'custom-cell text-left', sortable: true},
+                { key: 'weighing_category_name', label: 'Kategori', thStyle: 'text-align: left;', tdClass: 'custom-cell text-left', sortable: true},
+                { key: 'item_name', label: 'Barang', thStyle: 'text-align: left;', tdClass: 'custom-cell text-left', sortable: true},
+                { key: 'supplier_name', label: 'Supplier/Pembeli', thStyle: 'text-align: left;', tdClass: 'custom-cell text-left', sortable: true},
                 { key: 'do_code', label: 'Surat Jalan', thStyle: 'text-align: left;', tdClass: 'custom-cell text-left', sortable: true},
                 { key: 'netto_weight', label: 'Total Berat', thStyle: 'text-align: center;', tdClass: 'custom-cell text-center' , sortable: true},
                 { key: 'first_datetime', label: 'Tanggal Penimbangan', thStyle: 'text-align: center;', tdClass: 'custom-cell text-center' , sortable: true},
+                { key: 'stage', label: 'Status', thStyle: 'text-align: center;', tdClass: 'custom-cell text-center' , sortable: true},
                 { key: 'action', label: 'Aksi', thStyle: 'text-align: center; min-width: 60px;', tdClass: 'custom-cell text-center' }
             ],
             meta: [],
@@ -786,8 +806,23 @@ export default {
         this.loadSupplierOptions()
         this.loadEmployeeOptions()
         this.loadWeighingCategoryOptions()
+        this.changedDetection()
     },
     methods: {
+        formatNumber(value) {
+            let val = (value/1).toFixed(0).replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        },
+        changedDetection(){
+            this.new_data = this.newData
+            this.new_status = this.newStatus
+            if(this.newChanged) this.queryParams.page = 1
+            var data = this
+            setTimeout(function(){
+                data.new_data = null
+                data.new_status = null
+            },5000);
+        },
         setCount(type, operator, number){
             var count = 0;
             if(type=="first") {

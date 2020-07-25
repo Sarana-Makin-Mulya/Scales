@@ -89,7 +89,7 @@
                         </a>
 
                         <!-- Delete Button -->
-                        <a
+                        <!-- <a
                             href="#"
                             class="action-button text-secondary"
                             data-toggle="tooltip"
@@ -97,7 +97,7 @@
                             @click.prevent="destroy(data.item)"
                         >
                             <i class="far fa-trash-alt"></i>
-                        </a>
+                        </a> -->
 
                         <span v-if="data.item.code==new_data">
                             {{ new_status }}

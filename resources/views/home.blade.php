@@ -24,7 +24,8 @@
         <section class="container-fluid">
             <weighing-main
                 url-data="{{ route('ajax.wh.get.weighing') }}"
-                url-store="{{ route('wh.weighing.store') }}"
+                url-first-store="{{ route('wh.weighing.first.store') }}"
+                url-second-store="{{ route('wh.weighing.second.store') }}"
                 url-supplier-options="{{ route('ajax.get.supplier.options') }}"
                 url-employee-options="{{ route('hr.ajax.employee.options') }}"
 
