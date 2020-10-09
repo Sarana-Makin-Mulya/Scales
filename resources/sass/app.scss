@@ -17,13 +17,14 @@
 @import '~overlayscrollbars/css/OverlayScrollbars.min.css';
 @import '~bootstrap-vue/dist/bootstrap-vue.css';
 @import '~element-theme-chalk';
-@import '~admin-lte/build/scss/AdminLTE';
+// @import '~admin-lte/build/scss/adminlte';
 @import '~vue-select/src/scss/vue-select.scss';
 
 //custom
 // @import '../component/general.scss';
 // @import '../component/sidebar.scss';
 // @import '../component/breadcrumb.scss';
+@import 'admin-lte/AdminLTE';
 @import 'custom-table';
 @import 'custom-form';
 @import 'custom-navbar';

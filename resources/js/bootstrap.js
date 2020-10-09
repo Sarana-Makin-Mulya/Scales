@@ -12,7 +12,7 @@ try {
 
     require('bootstrap');
     require('overlayscrollbars');
-    require('admin-lte');
+    // require('admin-lte');
 } catch (e) {}
 
 /**
