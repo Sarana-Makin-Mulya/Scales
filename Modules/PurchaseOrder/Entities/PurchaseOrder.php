@@ -23,6 +23,7 @@ class PurchaseOrder extends Model
 
     const PO_SUPPLIER     = 1;
     const PO_DIRECTLY     = 2;
+    const PO_COAL         = 3;
 
     const DATA_OPEN       = 0;
     const DATA_LOCK       = 1;

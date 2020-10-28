@@ -303,8 +303,8 @@
                                     </div>
 
                                     <!-- OTHER -->
-                                    <div class="row bg-light rmb-20"  v-if="firstForm.weighing_category_id==null || firstForm.weighing_category_id==3">
-                                        <div class="col-md-12 p-2" v-if="firstForm.weighing_category_id==3">
+                                    <div class="row bg-light rmb-20"  v-if="firstForm.weighing_category_id>3">
+                                        <div class="col-md-12 p-2" v-if="firstForm.weighing_category_id>3">
                                             <b-form-group id="group-do-code" label="Barang :" label-for="weighing_item_code" class="text-left">
                                                  <div @click="AddNewWeighingItemOptions()"
                                                     style="color:#38c172;font-weight:bold;cursor:pointer;margin-top:-24px;margin-left:73px;width:15px"
@@ -646,7 +646,7 @@
                                     </div>
 
                                     <!-- OTHER -->
-                                    <div class="row bg-light rmb-20"  v-if="secondForm.weighing_category_id==null || secondForm.weighing_category_id==3">
+                                    <div class="row bg-light rmb-20"  v-if="secondForm.weighing_category_id==null || secondForm.weighing_category_id>3">
                                         <div class="col-md-12 p-2">
                                             <b-form-group id="group-do-code" label="Barang :" label-for="weighing_item_code" class="text-left">
                                                 <b-form-input

@@ -81,11 +81,13 @@ class DetailWeighingResource extends Resource
                     ->where('id', $weighing->purchasing_purchase_order_item_id)
                     ->first();
                 $item_name = (!empty($data)) ? getItemName($data->item_code) : 2;
+            } elseif ($weighing->weighing_category_id==3) {
+                $item_name = "Batu Bara";
             } else {
                 $data = WeighingItems::query()
                     ->where('code', $weighing->weighing_item_code)
                     ->first();
-                $item_name = (!empty($data)) ? $data->name: 3;
+                $item_name = (!empty($data)) ? $data->name: 'Other';
             }
         }
 

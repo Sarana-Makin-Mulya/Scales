@@ -33,7 +33,7 @@ class WeighingController extends Controller
             'junk_item_spk_detail_id' => 'required_if:weighing_category_id,1',
             'purchase_order_code' => 'required_if:weighing_category_id,2',
             'purchasing_purchase_order_item_id' => 'required_if:weighing_category_id,2',
-            'weighing_item_code' => 'required_if:weighing_category_id,3',
+            'weighing_item_code' => 'required_if:weighing_category_id,4',
             'do_code' => 'required',
             // 'receiper' => 'required_if:weighing_category_id,2',
             'driver_name' => 'required',
